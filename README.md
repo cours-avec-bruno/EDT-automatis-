@@ -1,133 +1,122 @@
 # EDT Automatisé — Préparation aux Oraux
 
-Application web Streamlit qui lit vos Google Sheets d'inscriptions aux oraux et affiche l'emploi du temps personnalisé de chaque étudiant.
+Application web **Streamlit** qui lit vos Google Sheets et affiche l'emploi du temps personnalisé de chaque étudiant dès qu'il tape son prénom.
+
+---
 
 ## Fonctionnement
 
-1. Le professeur crée un Google Sheet par matière/épreuve
-2. Les étudiants s'inscrivent sur les créneaux (en écrivant leur prénom dans la colonne "Étudiant")
-3. L'étudiant ouvre l'application, tape son prénom → son EDT complet s'affiche en temps réel
+1. Le professeur crée un Google Sheet par matière (Physique-Chimie, Maths…)
+2. Les étudiants s'inscrivent dans les cellules correspondantes
+3. L'étudiant ouvre l'application, tape son prénom → son EDT s'affiche immédiatement
+4. Cliquer sur **🔄 Actualiser** pour voir les nouvelles inscriptions (sinon mise à jour auto toutes les 60 s)
 
 ---
 
-## Format des Google Sheets
+## Format des Google Sheets reconnu automatiquement
 
-Chaque feuille doit contenir **une ligne par créneau** avec au minimum une colonne prénom :
+L'application reconnaît **3 types de sections** dans un même fichier :
 
-| Date       | Heure | Salle | Groupe | Examinateur | Étudiant |
-|------------|-------|-------|--------|-------------|----------|
-| 02/06/2026 | 09:00 | A201  | 1A     | M. Dupont   | Marie    |
-| 02/06/2026 | 09:30 | A201  | 1A     | M. Dupont   |          |
-| 02/06/2026 | 10:00 | A202  | 1B     | Mme Martin  | Lucas    |
+### Section TD
+```
+Inscription passage TD …
+Lundi 18 mai 🧑‍🏫   [vide]   [vide]   M2      EL8      T29      O1
+[vide]               [vide]   [vide]   Faure   Gerbaud  Martin   Dupont
+Vendredi 22 mai 🔍  [vide]   [vide]   T14     T15      O6       O15
+[vide]               [vide]   [vide]   [vide]  Ricci    [vide]   [vide]
+```
+- Lignes par paires : **date + codes groupe** / **prénoms des inscrits**
+- 🧑‍🏫 = séance de passage,  🔍 = séance de recherche
 
-> Les noms de colonnes sont **configurables** dans `config.json` (voir ci-dessous).
+### Section Oral (un examinateur par section)
+```
+Inscription oral M. Louvet (physique-chimie)  Arriver 30 min avant…
+Jour  [vide]  Salle  8h00-8h30  8h30-9h00  9h00-9h30  …
+Mardi  19 mai  [salle]  [vide]  [vide]  Ricci  [vide]  …
+```
+- La ligne `Jour` définit les créneaux horaires (colonnes)
+- Chaque ligne de date : écrire le prénom dans la colonne du créneau voulu
+
+### Section TP
+```
+Préparation à l'épreuve de TP          …  Inscrits aux TP
+Jour  [vide]  Salle  Horaire  Programme  …  À amener  …  Ricci
+Mardi  19 mai  207   9h-12h   Présentation TP  …  TP EL9…
+Mardi  26 mai  208   9h-12h   TP tournants   …  …
+```
+- Écrire le prénom comme **en-tête de colonne** = l'étudiant est inscrit à toutes les séances
 
 ---
 
-## Installation
+## Installation locale
 
-### 1. Cloner le projet
-
+### 1. Cloner et installer les dépendances
 ```bash
 git clone <url-du-repo>
 cd EDT-automatis-
 pip install -r requirements.txt
 ```
 
-### 2. Créer un compte de service Google
+### 2. Créer un compte de service Google API
 
-1. Allez sur [console.cloud.google.com](https://console.cloud.google.com)
-2. Créez un nouveau projet (ou utilisez un existant)
-3. Activez l'API **Google Sheets** et l'API **Google Drive**
-4. Allez dans **IAM et administration > Comptes de service**
-5. Créez un compte de service → générez une clé JSON
-6. Téléchargez le fichier JSON et renommez-le `credentials.json` à la racine du projet
+1. [console.cloud.google.com](https://console.cloud.google.com) → Nouveau projet
+2. Activer **Google Sheets API** + **Google Drive API**
+3. IAM → Comptes de service → Créer → Générer une clé JSON
+4. Renommer le fichier téléchargé en **`credentials.json`** et le placer à la racine
 
-### 3. Partager vos Google Sheets
+### 3. Partager chaque Google Sheet avec le compte de service
 
-Pour chaque Google Sheet d'inscriptions :
-- Cliquez sur **Partager**
-- Ajoutez l'adresse email du compte de service (ex: `edt-app@mon-projet.iam.gserviceaccount.com`)
-- Donnez l'accès en **Lecteur**
+Sur chaque Sheet → **Partager** → ajouter l'email du compte de service (ex: `edt-app@mon-projet.iam.gserviceaccount.com`) avec accès **Lecteur**.
 
 ### 4. Configurer les feuilles
-
-Copiez l'exemple et adaptez-le :
 
 ```bash
 cp config.example.json config.json
 ```
 
 Éditez `config.json` :
-
 ```json
 {
   "sheets": [
     {
-      "matiere": "Mathématiques",
+      "matiere": "Physique-Chimie",
       "url": "https://docs.google.com/spreadsheets/d/VOTRE_ID/edit",
-      "onglet": "Feuille1",
-      "colonne_etudiant": "Étudiant",
-      "colonne_date": "Date",
-      "colonne_heure": "Heure",
-      "colonne_salle": "Salle",
-      "colonne_groupe": "Groupe",
-      "colonne_examinateur": "Examinateur"
+      "onglet": null
     }
   ]
 }
 ```
+> `"onglet": null` → utilise le premier onglet. Mettez `"Feuille2"` pour un onglet spécifique.
 
-> **Note** : Si vos colonnes ont des noms différents (ex: "Nom élève" au lieu de "Étudiant"), changez la valeur dans `config.json`.
-
-### 5. Lancer l'application
-
+### 5. Lancer
 ```bash
 streamlit run app.py
 ```
-
-L'application s'ouvre sur [http://localhost:8501](http://localhost:8501)
+→ [http://localhost:8501](http://localhost:8501)
 
 ---
 
-## Déploiement en ligne (Streamlit Cloud)
+## Déploiement en ligne (Streamlit Cloud — gratuit)
 
-Pour que tous les étudiants y accèdent sans rien installer :
+Pour que tout le monde y accède sans rien installer :
 
-1. Poussez le projet sur GitHub (sans `credentials.json` ni `config.json` — ils sont dans `.gitignore`)
-2. Allez sur [share.streamlit.io](https://share.streamlit.io)
-3. Connectez votre repo GitHub
-4. Dans **Advanced settings > Secrets**, ajoutez :
+1. Poussez le repo sur GitHub (sans `credentials.json` ni `config.json` — ils sont dans `.gitignore`)
+2. [share.streamlit.io](https://share.streamlit.io) → connectez le repo
+3. Dans **Settings > Secrets**, collez le contenu de `credentials.json` :
 
 ```toml
 [gcp_service_account]
 type = "service_account"
 project_id = "votre-projet"
-private_key_id = "..."
-private_key = "-----BEGIN RSA PRIVATE KEY-----\n..."
+private_key_id = "abc123"
+private_key = "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n"
 client_email = "edt-app@votre-projet.iam.gserviceaccount.com"
 client_id = "..."
-# ... (copiez le contenu de credentials.json ici)
+auth_uri = "https://accounts.google.com/o/oauth2/auth"
+token_uri = "https://oauth2.googleapis.com/token"
 ```
 
-Et dans un second secret :
-
-```toml
-# Vous pouvez aussi mettre config.json dans les secrets Streamlit
-# ou le committer directement (il ne contient pas de données sensibles)
-```
-
----
-
-## Utilisation
-
-1. Ouvrez l'application dans votre navigateur
-2. Tapez votre **prénom** dans le champ de recherche
-3. Votre EDT s'affiche par matière
-4. Cliquez sur **🔄 Actualiser** pour recharger les feuilles en temps réel
-5. Téléchargez votre EDT en CSV si besoin
-
-> La recherche est **insensible à la casse et aux accents** : "marie", "Marie" et "MARIE" donnent le même résultat.
+4. Ajoutez aussi un secret `config` avec le contenu de votre `config.json`, **ou** commitez directement `config.json` (il ne contient pas de données sensibles).
 
 ---
 
@@ -135,10 +124,10 @@ Et dans un second secret :
 
 ```
 EDT-automatis-/
-├── app.py                # Application Streamlit principale
-├── config.json           # Votre configuration (non versionné)
+├── app.py                # Application Streamlit
+├── config.json           # Vos URLs de sheets (non versionné)
 ├── config.example.json   # Exemple de configuration
-├── credentials.json      # Clé Google API (non versionné, JAMAIS committer)
+├── credentials.json      # Clé Google API (JAMAIS committer)
 ├── requirements.txt      # Dépendances Python
 └── .gitignore
 ```
