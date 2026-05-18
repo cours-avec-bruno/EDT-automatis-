@@ -131,7 +131,12 @@ export default function WeekCalendar({ monday, events, oraux, direction }: Props
               const holiday  = HOLIDAYS[iso]
               const isToday  = iso === today
               const dayBase  = events.filter(e => e.date === iso)
-              const dayOral  = oraux.filter(o => o.date_iso === iso && o.heure_start && o.heure_end)
+              const dayOral  = oraux.filter(o =>
+                o.date_iso === iso &&
+                o.heure_start &&
+                o.heure_end &&
+                !o.type.startsWith('TP')
+              )
 
               return (
                 <div
