@@ -2,33 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap');
 
 :root {
-  --border:       rgba(255,255,255,0.055);
-  --border-strong: rgba(255,255,255,0.11);
-  --text-1:       rgba(255,255,255,0.92);
-  --text-2:       rgba(255,255,255,0.5);
-  --text-3:       rgba(255,255,255,0.28);
-  --accent:       #6366f1;
-  --accent-2:     #818cf8;
-  --accent-sub:   rgba(99,102,241,0.1);
+  --bg:            #09090b;
+  --surface-1:     #0f0f12;
+  --surface-2:     #141417;
+  --surface-3:     #1c1c20;
+  --border:        rgba(255,255,255,0.05);
+  --border-hover:  rgba(255,255,255,0.09);
+  --text-1:        #f4f4f5;
+  --text-2:        #71717a;
+  --text-3:        #52525b;
+  --accent:        #7c3aed;
+  --accent-2:      #8b5cf6;
+  --accent-sub:    rgba(139,92,246,0.08);
+  --accent-border: rgba(139,92,246,0.18);
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-font-smoothing: antialiased; }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 body {
-  background: #080909;
+  background: var(--bg);
   color: var(--text-1);
   font-family: 'Inter', system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
   min-height: 100vh;
 }
 
-::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar        { width: 5px; }
 ::-webkit-scrollbar-track  { background: transparent; }
-::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.08); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.06); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.1); }
 
-::selection { background: rgba(99,102,241,0.3); }
+::selection { background: rgba(139,92,246,0.25); }

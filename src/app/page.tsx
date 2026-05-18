@@ -16,7 +16,6 @@ export default function Page() {
   const [schedule,  setSchedule]  = useState<ScheduleData | null>(null)
   const [loading,   setLoading]   = useState(true)
 
-  // Initialise on week containing today
   useEffect(() => {
     const today = todayISO()
     const idx = WEEK_STARTS.findIndex(mon => {
@@ -49,7 +48,7 @@ export default function Page() {
   const oraux = schedule?.oraux ?? []
 
   return (
-    <div className="min-h-screen" style={{ background: '#080909' }}>
+    <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       <Navbar
         monday={WEEK_STARTS[weekIdx]}
         weekIndex={weekIdx}
@@ -61,7 +60,43 @@ export default function Page() {
 
       <TodayStrip events={BASE_SCHEDULE} oraux={oraux} />
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 pb-24">
+        {/* Page header */}
+        <div className="py-10 pb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <span
+              className="inline-flex items-center h-5 px-2 rounded text-[10px] font-medium tracking-widest uppercase"
+              style={{ background: 'var(--accent-sub)', color: 'var(--accent-2)', border: '1px solid var(--accent-border)' }}
+            >
+              Préparation 2026
+            </span>
+          </div>
+          <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight leading-none" style={{ color: 'var(--text-1)' }}>
+            Bruno Ricci
+          </h1>
+          <div className="flex flex-wrap items-center gap-2 mt-3">
+            {[
+              { label: 'Classe', value: 'PT' },
+              { label: 'TD', value: 'Groupe A (TD1)' },
+              { label: 'TP SI', value: 'Groupe 1' },
+              { label: 'TP Physique', value: 'Groupe 1' },
+            ].map(({ label, value }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-md text-[11px]"
+                style={{
+                  background: 'var(--surface-2)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text-2)',
+                }}
+              >
+                <span style={{ color: 'var(--text-3)' }}>{label}</span>
+                <span className="font-medium" style={{ color: 'var(--text-1)' }}>{value}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
         <WeekCalendar
           monday={WEEK_STARTS[weekIdx]}
           events={BASE_SCHEDULE}

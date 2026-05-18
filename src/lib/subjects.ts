@@ -1,65 +1,68 @@
 import type { SubjectKey } from './types'
 
 export interface SubjectConfig {
-  label:  string
-  color:  string   // CSS color for text / border
-  bg:     string   // subtle background
-  dot:    string   // full opacity dot
+  label: string
+  color: string
+  bg:    string
+  dot:   string
 }
+
+// Muted, desaturated — colors used only for 2px left borders
+const CARD_BG = 'rgba(255,255,255,0.025)'
 
 export const SUBJECTS: Record<SubjectKey, SubjectConfig> = {
   physique: {
     label: 'Physique',
-    color: 'hsl(210 88% 62%)',
-    bg:    'hsl(210 88% 62% / 0.08)',
-    dot:   'hsl(210 88% 62%)',
+    color: '#60a5fa',
+    bg:    CARD_BG,
+    dot:   '#60a5fa',
   },
   'tp-phys': {
     label: 'TP Physique',
-    color: 'hsl(205 78% 58%)',
-    bg:    'hsl(205 78% 58% / 0.08)',
-    dot:   'hsl(205 78% 58%)',
+    color: '#38bdf8',
+    bg:    CARD_BG,
+    dot:   '#38bdf8',
   },
   maths: {
     label: 'Maths',
-    color: 'hsl(347 82% 65%)',
-    bg:    'hsl(347 82% 65% / 0.08)',
-    dot:   'hsl(347 82% 65%)',
+    color: '#f472b6',
+    bg:    CARD_BG,
+    dot:   '#f472b6',
   },
   si: {
     label: 'SI',
-    color: 'hsl(158 65% 50%)',
-    bg:    'hsl(158 65% 50% / 0.08)',
-    dot:   'hsl(158 65% 50%)',
+    color: '#34d399',
+    bg:    CARD_BG,
+    dot:   '#34d399',
   },
   'tp-si': {
     label: 'TP SI',
-    color: 'hsl(152 58% 50%)',
-    bg:    'hsl(152 58% 50% / 0.08)',
-    dot:   'hsl(152 58% 50%)',
+    color: '#6ee7b7',
+    bg:    CARD_BG,
+    dot:   '#6ee7b7',
   },
   francais: {
     label: 'Français',
-    color: 'hsl(36 88% 57%)',
-    bg:    'hsl(36 88% 57% / 0.08)',
-    dot:   'hsl(36 88% 57%)',
+    color: '#fb923c',
+    bg:    CARD_BG,
+    dot:   '#fb923c',
   },
   python: {
     label: 'Python',
-    color: 'hsl(192 85% 52%)',
-    bg:    'hsl(192 85% 52% / 0.08)',
-    dot:   'hsl(192 85% 52%)',
+    color: '#fbbf24',
+    bg:    CARD_BG,
+    dot:   '#fbbf24',
   },
   tipe: {
     label: 'TIPE',
-    color: 'hsl(261 74% 68%)',
-    bg:    'hsl(261 74% 68% / 0.08)',
-    dot:   'hsl(261 74% 68%)',
+    color: '#a78bfa',
+    bg:    CARD_BG,
+    dot:   '#a78bfa',
   },
   oral: {
     label: 'Oral / Colle',
-    color: 'hsl(245 75% 68%)',
-    bg:    'hsl(245 75% 68% / 0.12)',
-    dot:   'hsl(245 75% 68%)',
+    color: '#8b5cf6',
+    bg:    'rgba(139,92,246,0.08)',
+    dot:   '#8b5cf6',
   },
 }
