@@ -1,16 +1,13 @@
 name: Mise à jour des oraux
 
 on:
-  # Toutes les 10 minutes
   schedule:
     - cron: '*/10 * * * *'
-  # Déclenché manuellement depuis l'onglet Actions
   workflow_dispatch:
-  # Déclenché par un push sur main (après auto-merge)
   push:
     branches: [main]
     paths-ignore:
-      - 'data/oraux_ricci.json'  # éviter la boucle infinie
+      - 'public/data/oraux_ricci.json'
 
 permissions:
   contents: write
@@ -36,7 +33,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/oraux_ricci.json
+          git add public/data/oraux_ricci.json
           if git diff --cached --quiet; then
             echo "Aucun changement détecté."
           else

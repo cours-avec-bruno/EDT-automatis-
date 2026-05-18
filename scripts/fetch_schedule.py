@@ -323,11 +323,11 @@ def main():
         "errors": errors,
     }
 
-    os.makedirs("data", exist_ok=True)
-    with open("data/oraux_ricci.json", "w", encoding="utf-8") as f:
+    os.makedirs("public/data", exist_ok=True)
+    with open("public/data/oraux_ricci.json", "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
 
-    print(f"[✓] data/oraux_ricci.json mis à jour ({len(all_oraux)} créneaux)")
+    print(f"[✓] public/data/oraux_ricci.json mis à jour ({len(all_oraux)} créneaux)")
 
 
 if __name__ == "__main__":
