@@ -1,0 +1,26 @@
+{
+  "sheets": [
+    {
+      "matiere": "Mathématiques",
+      "url": "https://docs.google.com/spreadsheets/d/VOTRE_ID_ICI/edit",
+      "onglet": "Feuille1",
+      "colonne_etudiant": "Étudiant",
+      "colonne_date": "Date",
+      "colonne_heure": "Heure",
+      "colonne_salle": "Salle",
+      "colonne_groupe": "Groupe",
+      "colonne_examinateur": "Examinateur"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "url": "https://docs.google.com/spreadsheets/d/AUTRE_ID/edit",
+      "onglet": "Inscriptions",
+      "colonne_etudiant": "Nom élève",
+      "colonne_date": "Date",
+      "colonne_heure": "Heure début",
+      "colonne_salle": "Salle",
+      "colonne_groupe": "Classe",
+      "colonne_examinateur": "Prof"
+    }
+  ]
+}
