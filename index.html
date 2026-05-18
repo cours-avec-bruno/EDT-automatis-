@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDT — Bruno RICCI</title>
+  <style>
+    :root {
+      --bg:        #080e1a;
+      --surface:   #111827;
+      --surface2:  #1f2937;
+      --border:    #374151;
+      --text:      #f1f5f9;
+      --muted:     #9ca3af;
+      --physique:  #3b82f6;
+      --maths:     #f43f5e;
+      --si:        #10b981;
+      --francais:  #f59e0b;
+      --python:    #06b6d4;
+      --tipe:      #8b5cf6;
+      --tp:        #f97316;
+      --oral:      #ec4899;
+      --ferie:     #6b7280;
+      --today:     rgba(16,185,129,.12);
+      --today-border: #10b981;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% -20%, rgba(139,92,246,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(139,92,246,.15);
+      border: 1px solid rgba(139,92,246,.4);
+      border-radius: 99px;
+      padding: .3rem 1rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, #e2e8f0, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: .5rem;
+    }
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1rem;
+    }
+    .meta-pill {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: .3rem .85rem;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .meta-pill span { color: var(--text); font-weight: 600; }
+
+    /* ── TODAY BANNER ───────────────────────────────────── */
+    #today-banner {
+      background: linear-gradient(90deg, rgba(16,185,129,.15), rgba(59,130,246,.1));
+      border-left: 3px solid var(--today-border);
+      margin: 1.5rem auto;
+      max-width: 900px;
+      padding: 1rem 1.5rem;
+      border-radius: 0 .75rem .75rem 0;
+    }
+    #today-banner h2 { font-size: 1rem; color: #34d399; margin-bottom: .5rem; font-weight: 700; }
+    .today-slots { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .today-slot {
+      border-radius: .5rem;
+      padding: .35rem .75rem;
+      font-size: .82rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    /* ── MAIN LAYOUT ────────────────────────────────────── */
+    main { max-width: 1100px; margin: 0 auto; padding: 0 1rem 4rem; }
+
+    /* ── WEEK NAVIGATION ────────────────────────────────── */
+    .week-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 1.5rem 0 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      padding: .75rem 1rem;
+    }
+    .week-nav button {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: .5rem;
+      padding: .4rem .9rem;
+      cursor: pointer;
+      font-size: .9rem;
+      transition: background .15s;
+    }
+    .week-nav button:hover { background: var(--border); }
+    .week-nav button:disabled { opacity: .35; cursor: default; }
+    #week-label { font-weight: 700; font-size: 1rem; }
+
+    /* ── SCHEDULE GRID ──────────────────────────────────── */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 52px repeat(5, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: .75rem;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    /* column headers */
+    .col-header {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      padding: .6rem .25rem;
+      text-align: center;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    .col-header .day-name { color: var(--text); }
+    .col-header .day-date { color: var(--muted); font-weight: 400; font-size: .7rem; }
+    .col-header.is-today { background: var(--today); border-bottom-color: var(--today-border); }
+    .col-header.is-today .day-name { color: #34d399; }
+
+    /* time gutter */
+    .time-gutter {
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .time-tick {
+      position: absolute;
+      right: 6px;
+      font-size: .6rem;
+      color: var(--muted);
+      transform: translateY(-50%);
+      white-space: nowrap;
+    }
+
+    /* day columns */
+    .day-col {
+      border-right: 1px solid var(--border);
+      position: relative;
+      min-height: 780px;
+    }
+    .day-col:last-child { border-right: none; }
+    .day-col.is-today { background: var(--today); }
+    .day-col.is-ferie {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ferie);
+      font-size: .8rem;
+      font-style: italic;
+    }
+
+    /* time row separators */
+    .hour-line {
+      position: absolute;
+      left: 0; right: 0;
+      border-top: 1px solid rgba(55,65,81,.5);
+    }
+
+    /* event blocks */
+    .event {
+      position: absolute;
+      left: 3px; right: 3px;
+      border-radius: .45rem;
+      padding: .3rem .4rem;
+      font-size: .7rem;
+      font-weight: 600;
+      overflow: hidden;
+      cursor: default;
+      transition: transform .1s, box-shadow .1s;
+      border-left: 3px solid rgba(255,255,255,.3);
+      line-height: 1.3;
+    }
+    .event:hover { transform: scale(1.02); box-shadow: 0 4px 16px rgba(0,0,0,.4); z-index: 10; }
+    .event .ev-name { font-size: .72rem; font-weight: 700; }
+    .event .ev-room { font-size: .62rem; opacity: .85; }
+    .event .ev-time { font-size: .6rem; opacity: .75; }
+    .event.oral-event {
+      border-left: 3px solid #f9a8d4;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%,100% { box-shadow: 0 0 6px rgba(236,72,153,.3); }
+      50%      { box-shadow: 0 0 14px rgba(236,72,153,.6); }
+    }
+
+    /* ── ORAUX SECTION ──────────────────────────────────── */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 2.5rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .oraux-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .oral-card {
+      background: var(--surface);
+      border: 1px solid rgba(236,72,153,.3);
+      border-radius: .75rem;
+      padding: 1rem 1.1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .oral-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+    .oral-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--oral), #f43f5e);
+    }
+    .oral-card .oc-type {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #f9a8d4;
+      margin-bottom: .3rem;
+    }
+    .oral-card .oc-date { font-size: 1.05rem; font-weight: 700; margin-bottom: .25rem; }
+    .oral-card .oc-time { font-size: .9rem; color: #34d399; font-weight: 600; margin-bottom: .5rem; }
+    .oral-card .oc-meta { font-size: .78rem; color: var(--muted); display: flex; flex-direction: column; gap: .2rem; }
+    .oral-card .oc-meta span { display: flex; align-items: center; gap: .4rem; }
+    .no-oraux {
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+      padding: 2rem;
+      background: var(--surface);
+      border-radius: .75rem;
+      border: 1px dashed var(--border);
+    }
+    #update-info {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: right;
+      margin-top: .75rem;
+    }
+
+    /* ── LEGEND ─────────────────────────────────────────── */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 700px) {
+      .schedule-grid { font-size: .65rem; }
+      .event { font-size: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header>
+  <div class="header-badge">📅 Préparation aux Oraux 2026</div>
+  <h1>Bruno RICCI</h1>
+  <div class="header-meta">
+    <div class="meta-pill">Classe <span>PT</span></div>
+    <div class="meta-pill">TD <span>Groupe A (TD1)</span></div>
+    <div class="meta-pill">TP SI <span>Groupe 1</span></div>
+    <div class="meta-pill">TP Physique <span>Groupe 1</span></div>
+  </div>
+</header>
+
+<!-- ══ MAIN ═════════════════════════════════════════════════ -->
+<main>
+  <!-- Today banner -->
+  <div id="today-banner">
+    <h2>⚡ Aujourd'hui</h2>
+    <div class="today-slots" id="today-slots"></div>
+  </div>
+
+  <!-- Week navigation -->
+  <div class="week-nav">
+    <button id="prev-week" onclick="changeWeek(-1)">← Semaine précédente</button>
+    <span id="week-label"></span>
+    <button id="next-week" onclick="changeWeek(+1)">Semaine suivante →</button>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend" id="legend"></div>
+
+  <!-- Calendar grid -->
+  <div class="schedule-grid" id="schedule-grid"></div>
+
+  <!-- Oraux section -->
+  <div class="section-title">🎤 Mes Oraux &amp; Colles</div>
+  <div class="oraux-grid" id="oraux-grid"></div>
+  <div id="update-info"></div>
+</main>
+
+<script>
+// ══ DONNÉES BASE ════════════════════════════════════════════
+
+const STUDENT = "Ricci Bruno";
+
+const CATEGORIES = {
+  physique:    { label: 'Physique',    color: '#3b82f6', bg: 'rgba(59,130,246,.18)'  },
+  'tp-phys':   { label: 'TP Physique', color: '#f97316', bg: 'rgba(249,115,22,.18)'  },
+  maths:       { label: 'Maths',       color: '#f43f5e', bg: 'rgba(244,63,94,.18)'   },
+  si:          { label: 'SI',          color: '#10b981', bg: 'rgba(16,185,129,.18)'  },
+  'tp-si':     { label: 'TP SI',       color: '#34d399', bg: 'rgba(52,211,153,.18)'  },
+  francais:    { label: 'Français',    color: '#f59e0b', bg: 'rgba(245,158,11,.18)'  },
+  python:      { label: 'Python',      color: '#06b6d4', bg: 'rgba(6,182,212,.18)'   },
+  tipe:        { label: 'TIPE',        color: '#8b5cf6', bg: 'rgba(139,92,246,.18)'  },
+  oral:        { label: 'Oral/Colle',  color: '#ec4899', bg: 'rgba(236,72,153,.22)'  },
+};
+
+/* Base schedule  — Groupe A (TD1), TP Groupe 1
+   Format : { date:'YYYY-MM-DD', label, cat, room, start:'HH:MM', end:'HH:MM' }
+*/
+const BASE = [
+  // ── Lundi 18 mai ──────────────────────────────────────
+  { date:'2026-05-18', label:'SI',          cat:'si',       room:'104', start:'08:30', end:'09:30' },
+  { date:'2026-05-18', label:'Physique',    cat:'physique', room:'104', start:'10:05', end:'11:30' },
+  { date:'2026-05-18', label:'Maths',       cat:'maths',    room:'104', start:'14:30', end:'15:30' },
+  { date:'2026-05-18', label:'SI',          cat:'si',       room:'104', start:'16:30', end:'17:30' },
+  // ── Mardi 19 mai ──────────────────────────────────────
+  { date:'2026-05-19', label:'TP Physique', cat:'tp-phys',  room:'207', start:'09:30', end:'11:30' },
+  { date:'2026-05-19', label:'TIPE',        cat:'tipe',     room:'104', start:'12:55', end:'15:45' },
+  // ── Mercredi 20 mai ───────────────────────────────────
+  { date:'2026-05-20', label:'Français',    cat:'francais', room:'104', start:'10:05', end:'11:05' },
+  { date:'2026-05-20', label:'TP SI',       cat:'tp-si',    room:'114', start:'11:05', end:'12:30' },
+  { date:'2026-05-20', label:'TP SI',       cat:'tp-si',    room:'114', start:'14:30', end:'15:30' },
+  { date:'2026-05-20', label:'Physique',    cat:'physique', room:'104', start:'16:30', end:'17:30' },
+  // ── Jeudi 21 mai ──────────────────────────────────────
+  { date:'2026-05-21', label:'Python',      cat:'python',   room:'108', start:'08:30', end:'09:30' },
+  { date:'2026-05-21', label:'TD SI',       cat:'si',       room:'104', start:'10:30', end:'11:30' },
+  { date:'2026-05-21', label:'Maths',       cat:'maths',    room:'104', start:'13:50', end:'14:50' },
+  // ── Vendredi 22 mai ───────────────────────────────────
+  { date:'2026-05-22', label:'SI',          cat:'si',       room:'104', start:'08:30', end:'09:30' },
+  { date:'2026-05-22', label:'Maths',       cat:'maths',    room:'104', start:'10:30', end:'11:30' },
+  { date:'2026-05-22', label:'Physique',    cat:'physique', room:'104', start:'14:30', end:'15:30' },
+
+  // ── Lundi 25 mai — FÉRIÉ ──────────────────────────────
+  // ── Mardi 26 mai ──────────────────────────────────────
+  { date:'2026-05-26', label:'TP Physique', cat:'tp-phys',  room:'207', start:'09:30', end:'11:30' },
+  { date:'2026-05-26', label:'Maths',       cat:'maths',    room:'104', start:'13:50', end:'14:50' },
+  { date:'2026-05-26', label:'Python',      cat:'python',   room:'108', start:'16:30', end:'17:30' },
+  // ── Mercredi 27 mai ───────────────────────────────────
+  { date:'2026-05-27', label:'Français',    cat:'francais', room:'104', start:'10:30', end:'11:30' },
+  { date:'2026-05-27', label:'TP SI',       cat:'tp-si',    room:'114', start:'11:30', end:'12:30' },
+  { date:'2026-05-27', label:'TP SI',       cat:'tp-si',    room:'114', start:'16:30', end:'17:30' },
+  // ── Jeudi 28 mai ──────────────────────────────────────
+  { date:'2026-05-28', label:'Python',      cat:'python',   room:'108', start:'08:30', end:'09:30' },
+  { date:'2026-05-28', label:'TD SI',       cat:'si',       room:'104', start:'10:30', end:'11:30' },
+  { date:'2026-05-28', label:'Physique',    cat:'physique', room:'104', start:'13:50', end:'15:30' },
+  // ── Vendredi 29 mai ───────────────────────────────────
+  { date:'2026-05-29', label:'Physique',    cat:'physique', room:'104', start:'10:30', end:'11:30' },
+  { date:'2026-05-29', label:'Physique',    cat:'physique', room:'104', start:'14:30', end:'15:30' },
+  { date:'2026-05-29', label:'TP SI',       cat:'tp-si',    room:'114', start:'16:30', end:'17:30' },
+
+  // ── Lundi 1 juin ──────────────────────────────────────
+  { date:'2026-06-01', label:'Physique',    cat:'physique', room:'104', start:'10:05', end:'11:30' },
+  { date:'2026-06-01', label:'TD SI',       cat:'si',       room:'???', start:'13:50', end:'14:50' },
+  { date:'2026-06-01', label:'Maths',       cat:'maths',    room:'104', start:'16:30', end:'17:30' },
+  // ── Mardi 2 juin ──────────────────────────────────────
+  { date:'2026-06-02', label:'TP Physique', cat:'tp-phys',  room:'207', start:'09:30', end:'10:30' },
+  { date:'2026-06-02', label:'Maths',       cat:'maths',    room:'104', start:'13:50', end:'14:50' },
+  { date:'2026-06-02', label:'Python',      cat:'python',   room:'108', start:'16:30', end:'17:30' },
+  // ── Mercredi 3 juin ───────────────────────────────────
+  { date:'2026-06-03', label:'TP SI',       cat:'tp-si',    room:'114', start:'10:30', end:'12:30' },
+  { date:'2026-06-03', label:'Physique',    cat:'physique', room:'104', start:'13:50', end:'15:30' },
+  { date:'2026-06-03', label:'Physique',    cat:'physique', room:'104', start:'16:30', end:'17:30' },
+  // ── Jeudi 4 juin ──────────────────────────────────────
+  { date:'2026-06-04', label:'TD SI',       cat:'si',       room:'104', start:'09:30', end:'10:30' },
+  { date:'2026-06-04', label:'TP SI',       cat:'tp-si',    room:'114', start:'10:30', end:'11:30' },
+  { date:'2026-06-04', label:'Physique',    cat:'physique', room:'104', start:'13:50', end:'15:30' },
+  // ── Vendredi 5 juin ───────────────────────────────────
+  { date:'2026-06-05', label:'TD SI',       cat:'si',       room:'???', start:'10:30', end:'11:30' },
+  { date:'2026-06-05', label:'Physique',    cat:'physique', room:'104', start:'14:30', end:'15:30' },
+  { date:'2026-06-05', label:'TP SI',       cat:'tp-si',    room:'114', start:'16:30', end:'17:30' },
+];
+
+const HOLIDAYS = { '2026-05-25': 'Lundi de Pentecôte' };
+
+// ══ SEMAINES ════════════════════════════════════════════════
+// Chaque semaine = lundi de la semaine (YYYY-MM-DD)
+const WEEK_STARTS = [
+  '2026-05-18','2026-05-25','2026-06-01',
+  '2026-06-08','2026-06-15','2026-06-22',
+];
+
+// ══ HELPERS TEMPS ════════════════════════════════════════════
+const DAY_START = 7*60+55;  // 7h55 en minutes
+const DAY_END   = 18*60;    // 18h00
+const PX_PER_MIN = 1.4;
+const GRID_HEIGHT = (DAY_END - DAY_START) * PX_PER_MIN;
+
+function toMin(hhmm) {
+  const [h,m] = hhmm.split(':').map(Number);
+  return h*60 + m;
+}
+function toPercent(hhmm) {
+  return ((toMin(hhmm) - DAY_START) / (DAY_END - DAY_START)) * 100;
+}
+function eventTop(start)     { return toPercent(start); }
+function eventHeight(s, e)   { return ((toMin(e) - toMin(s)) / (DAY_END - DAY_START)) * 100; }
+
+function fmtDate(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' });
+}
+function todayIso() {
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+function weekDays(mondayIso) {
+  const mon = new Date(mondayIso + 'T12:00:00');
+  return Array.from({length:5}, (_,i) => {
+    const d = new Date(mon);
+    d.setDate(mon.getDate() + i);
+    return d.toISOString().slice(0,10);
+  });
+}
+
+// ══ RENDU CALENDRIER ════════════════════════════════════════
+
+let currentWeek = 0;
+let orauxData   = [];
+
+function initWeek() {
+  const today = todayIso();
+  currentWeek = WEEK_STARTS.findIndex(w => {
+    const days = weekDays(w);
+    return days.includes(today) || w > today;
+  });
+  if (currentWeek < 0) currentWeek = WEEK_STARTS.length - 1;
+}
+
+function changeWeek(delta) {
+  currentWeek = Math.max(0, Math.min(WEEK_STARTS.length - 1, currentWeek + delta));
+  renderWeek();
+}
+
+function renderWeek() {
+  const grid   = document.getElementById('schedule-grid');
+  const label  = document.getElementById('week-label');
+  const prev   = document.getElementById('prev-week');
+  const next   = document.getElementById('next-week');
+  const today  = todayIso();
+  const days   = weekDays(WEEK_STARTS[currentWeek]);
+  const DAY_NAMES = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi'];
+  const MON_NAMES = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+
+  prev.disabled = currentWeek === 0;
+  next.disabled = currentWeek === WEEK_STARTS.length - 1;
+
+  const firstDay = new Date(days[0]+'T12:00:00');
+  const lastDay  = new Date(days[4]+'T12:00:00');
+  label.textContent =
+    `Semaine du ${firstDay.getDate()} au ${lastDay.getDate()} ${MON_NAMES[lastDay.getMonth()]} ${lastDay.getFullYear()}`;
+
+  // Build hour tick positions
+  const ticks = [];
+  for (let h = 8; h <= 17; h++) {
+    ticks.push({ label: `${h}h`, pct: toPercent(`${String(h).padStart(2,'0')}:00`) });
+  }
+
+  grid.innerHTML = '';
+
+  // ── Row 1: headers ──────────────────────────────────────
+  // Empty gutter header
+  const gutterHead = el('div', 'col-header');
+  grid.appendChild(gutterHead);
+
+  days.forEach((iso, i) => {
+    const d   = new Date(iso+'T12:00:00');
+    const div = el('div', `col-header${iso===today?' is-today':''}`);
+    div.innerHTML = `<div class="day-name">${DAY_NAMES[i]}</div>
+                     <div class="day-date">${d.getDate()} ${MON_NAMES[d.getMonth()]}</div>`;
+    grid.appendChild(div);
+  });
+
+  // ── Row 2: time gutter + day columns ────────────────────
+  // Time gutter
+  const gutter = el('div','time-gutter');
+  gutter.style.height = GRID_HEIGHT + 'px';
+  ticks.forEach(t => {
+    const tick = el('div','time-tick');
+    tick.style.top = t.pct + '%';
+    tick.textContent = t.label;
+    gutter.appendChild(tick);
+  });
+  grid.appendChild(gutter);
+
+  days.forEach(iso => {
+    const isToday   = iso === today;
+    const isHoliday = HOLIDAYS[iso];
+    const col = el('div', `day-col${isToday?' is-today':''}${isHoliday?' is-ferie':''}`);
+    col.style.height = GRID_HEIGHT + 'px';
+
+    if (isHoliday) {
+      col.textContent = isHoliday;
+      grid.appendChild(col);
+      return;
+    }
+
+    // Hour lines
+    ticks.forEach(t => {
+      const line = el('div','hour-line');
+      line.style.top = t.pct + '%';
+      col.appendChild(line);
+    });
+
+    // Base events
+    BASE.filter(e => e.date === iso).forEach(e => renderEvent(col, e));
+
+    // Oral events from dynamic data
+    orauxData.filter(o => o.date_iso === iso).forEach(o => {
+      if (o.heure_start && o.heure_end) {
+        renderEvent(col, {
+          label: `🎤 ${o.professeur || o.type}`,
+          cat:   'oral',
+          room:  o.salle || '—',
+          start: o.heure_start,
+          end:   o.heure_end,
+        });
+      }
+    });
+
+    grid.appendChild(col);
+  });
+}
+
+function renderEvent(col, e) {
+  const cat = CATEGORIES[e.cat] || CATEGORIES.oral;
+  const div = el('div', `event${e.cat==='oral'?' oral-event':''}`);
+  div.style.top    = eventTop(e.start) + '%';
+  div.style.height = Math.max(eventHeight(e.start, e.end), 3) + '%';
+  div.style.background = cat.bg;
+  div.style.color      = cat.color;
+  div.style.borderLeftColor = cat.color;
+  div.innerHTML = `
+    <div class="ev-name">${e.label}</div>
+    <div class="ev-room">📍 Salle ${e.room}</div>
+    <div class="ev-time">${e.start.replace(':','h')}–${e.end.replace(':','h')}</div>`;
+  div.title = `${e.label} · Salle ${e.room} · ${e.start.replace(':','h')}–${e.end.replace(':','h')}`;
+  col.appendChild(div);
+}
+
+// ══ BANNER AUJOURD'HUI ══════════════════════════════════════
+
+function renderTodayBanner() {
+  const today = todayIso();
+  const banner = document.getElementById('today-banner');
+  const slotsEl = document.getElementById('today-slots');
+
+  const todayBase = BASE.filter(e => e.date === today);
+  const todayOral = orauxData.filter(o => o.date_iso === today);
+  const all = [...todayBase, ...todayOral.map(o => ({
+    label: `🎤 Oral (${o.professeur || o.matiere})`,
+    cat: 'oral',
+    room: o.salle || '—',
+    start: o.heure_start || '?',
+    end: o.heure_end || '?'
+  }))];
+
+  if (!all.length) {
+    banner.innerHTML = '<h2>Aucun cours prévu aujourd\'hui</h2>';
+    return;
+  }
+
+  all.sort((a,b) => a.start.localeCompare(b.start));
+  slotsEl.innerHTML = all.map(e => {
+    const cat = CATEGORIES[e.cat] || CATEGORIES.oral;
+    return `<div class="today-slot" style="background:${cat.bg};color:${cat.color};border:1px solid ${cat.color}40">
+      <strong>${e.start.replace(':','h')}</strong> ${e.label} <small>· ${e.room}</small>
+    </div>`;
+  }).join('');
+}
+
+// ══ RENDU ORAUX DYNAMIQUES ══════════════════════════════════
+
+function renderOraux() {
+  const grid = document.getElementById('oraux-grid');
+  if (!orauxData.length) {
+    grid.innerHTML = '<div class="no-oraux">Aucun oral ou colle inscrit pour l\'instant.<br>Ajoutez-vous sur les Google Sheets — la page se met à jour automatiquement.</div>';
+    return;
+  }
+  grid.innerHTML = orauxData.map(o => `
+    <div class="oral-card">
+      <div class="oc-type">${o.type || 'Oral'} · ${o.matiere}</div>
+      <div class="oc-date">${o.date_label || o.date_iso}</div>
+      <div class="oc-time">⏰ ${o.heure}</div>
+      <div class="oc-meta">
+        ${o.professeur ? `<span>👨‍🏫 ${o.professeur}</span>` : ''}
+        ${o.salle && o.salle !== '—' ? `<span>📍 Salle ${o.salle}</span>` : ''}
+        ${o.groupe && o.groupe !== '—' ? `<span>👥 Groupe ${o.groupe}</span>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+// ══ LÉGENDE ═════════════════════════════════════════════════
+
+function renderLegend() {
+  const el2 = document.getElementById('legend');
+  el2.innerHTML = Object.entries(CATEGORIES).map(([,v]) =>
+    `<div class="legend-item">
+       <div class="legend-dot" style="background:${v.color}"></div>
+       ${v.label}
+     </div>`
+  ).join('');
+}
+
+// ══ FETCH ORAUX ═════════════════════════════════════════════
+
+async function fetchOraux() {
+  try {
+    const r = await fetch(`./data/oraux_ricci.json?t=${Date.now()}`);
+    if (!r.ok) return;
+    const d = await r.json();
+    orauxData = d.oraux || [];
+    if (d.updated_at) {
+      document.getElementById('update-info').textContent =
+        `Dernière mise à jour des oraux : ${d.updated_at}`;
+    }
+  } catch (_) {
+    // file not yet generated — silent fail
+  }
+  renderTodayBanner();
+  renderWeek();
+  renderOraux();
+}
+
+// ══ UTILS ════════════════════════════════════════════════════
+
+function el(tag, cls) {
+  const d = document.createElement(tag);
+  if (cls) d.className = cls;
+  return d;
+}
+
+// ══ INIT ═════════════════════════════════════════════════════
+
+initWeek();
+renderLegend();
+renderTodayBanner();
+renderWeek();
+renderOraux();
+fetchOraux();
+
+// Auto-refresh toutes les 5 minutes
+setInterval(fetchOraux, 5 * 60 * 1000);
+</script>
+</body>
+</html>
