@@ -1,5 +1,103 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "initialisation",
-  "oraux": []
+  "updated_at": "18/05/2026 16:05 UTC",
+  "oraux": [
+    {
+      "matiere": "Physique-Chimie",
+      "type": "TP — Présentation de l'épreuve + TP tournants",
+      "date_label": "Mardi 19 mai",
+      "date_iso": "2026-05-19",
+      "heure": "9h-12h",
+      "heure_start": "09:00",
+      "heure_end": "12:00",
+      "groupe": "—",
+      "salle": "207",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Mardi 19 mai",
+      "date_iso": "2026-05-19",
+      "heure": "13h30-14h00",
+      "heure_start": "13:30",
+      "heure_end": "14:00",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Jeudi 21 mai",
+      "date_iso": "2026-05-21",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "🧑‍🏫 Passage TD",
+      "date_label": "Vendredi 22 mai",
+      "date_iso": "2026-05-22",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "T15",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "TP — TP tournants",
+      "date_label": "Mardi 26 mai",
+      "date_iso": "2026-05-26",
+      "heure": "9h-12h",
+      "heure_start": "09:00",
+      "heure_end": "12:00",
+      "groupe": "Programme des TP Tournants",
+      "salle": "208",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "TP — Michelson",
+      "date_label": "Mardi 2 juin",
+      "date_iso": "2026-06-02",
+      "heure": "9h-12h",
+      "heure_start": "09:00",
+      "heure_end": "12:00",
+      "groupe": "Modulation d'amplitude",
+      "salle": "207",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "TP — Simulation d'épreuve de TP",
+      "date_label": "Mardi 9 juin",
+      "date_iso": "2026-06-09",
+      "heure": "9h-12h",
+      "heure_start": "09:00",
+      "heure_end": "12:00",
+      "groupe": "Corps immergé dans un fluide",
+      "salle": "207",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "TP — TP tournants",
+      "date_label": "Mardi 16 juin",
+      "date_iso": "2026-06-16",
+      "heure": "9h-12h",
+      "heure_start": "09:00",
+      "heure_end": "12:00",
+      "groupe": "Ondes acoustiques",
+      "salle": "207",
+      "professeur": "—"
+    }
+  ],
+  "errors": []
 }
