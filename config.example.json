@@ -1,0 +1,14 @@
+{
+  "sheets": [
+    {
+      "matiere": "Physique-Chimie",
+      "url": "https://docs.google.com/spreadsheets/d/VOTRE_ID_ICI/edit",
+      "onglet": null
+    },
+    {
+      "matiere": "Mathématiques",
+      "url": "https://docs.google.com/spreadsheets/d/AUTRE_ID/edit",
+      "onglet": null
+    }
+  ]
+}
