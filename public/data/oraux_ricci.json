@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "19/05/2026 14:17 UTC",
+  "updated_at": "19/05/2026 17:17 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -72,6 +72,30 @@
       "heure_end": "12:00",
       "groupe": "Programme des TP Tournants",
       "salle": "208",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Mardi 26 mai",
+      "date_iso": "2026-05-26",
+      "heure": "13h30-14h00",
+      "heure_start": "13:30",
+      "heure_end": "14:00",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mercredi 27 mai",
+      "date_iso": "2026-05-27",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
       "professeur": "—"
     },
     {
