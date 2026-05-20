@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "20/05/2026 21:06 UTC",
+  "updated_at": "20/05/2026 22:40 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -95,6 +95,18 @@
       "heure_start": null,
       "heure_end": null,
       "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "🧑‍🏫 Passage TD",
+      "date_label": "Vendredi 29 mai",
+      "date_iso": "2026-05-29",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "M3",
       "salle": "—",
       "professeur": "—"
     },
