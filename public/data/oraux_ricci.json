@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "21/05/2026 20:11 UTC",
+  "updated_at": "21/05/2026 21:48 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -71,6 +71,18 @@
       "heure_start": null,
       "heure_end": null,
       "groupe": "T15",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Vendredi 22 mai",
+      "date_iso": "2026-05-22",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
       "salle": "—",
       "professeur": "—"
     },
