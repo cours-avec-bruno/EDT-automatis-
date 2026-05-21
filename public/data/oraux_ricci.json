@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "21/05/2026 06:10 UTC",
+  "updated_at": "21/05/2026 10:04 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -35,7 +35,19 @@
       "heure_start": "13:30",
       "heure_end": "14:00",
       "groupe": "—",
-      "salle": "—",
+      "salle": "207",
+      "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Jeudi 21 mai",
+      "date_iso": "2026-05-21",
+      "heure": "17h30-18h",
+      "heure_start": "17:30",
+      "heure_end": "18:00",
+      "groupe": "—",
+      "salle": "207",
       "professeur": "M. Louvet"
     },
     {
