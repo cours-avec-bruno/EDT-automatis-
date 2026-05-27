@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "27/05/2026 16:28 UTC",
+  "updated_at": "27/05/2026 18:37 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -97,18 +97,6 @@
       "groupe": "—",
       "salle": "206",
       "professeur": "M. Louvet"
-    },
-    {
-      "matiere": "Physique-Chimie",
-      "type": "🧑‍🏫 Passage TD",
-      "date_label": "Jeudi 28 mai",
-      "date_iso": "2026-05-28",
-      "heure": "—",
-      "heure_start": null,
-      "heure_end": null,
-      "groupe": "EM12",
-      "salle": "—",
-      "professeur": "—"
     },
     {
       "matiere": "Mathématiques",
