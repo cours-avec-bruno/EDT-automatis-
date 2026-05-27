@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "27/05/2026 05:59 UTC",
+  "updated_at": "27/05/2026 09:43 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -76,7 +76,7 @@
     },
     {
       "matiere": "Physique-Chimie",
-      "type": "TP — TP tournants",
+      "type": "TP — Michelson",
       "date_label": "Mardi 26 mai",
       "date_iso": "2026-05-26",
       "heure": "9h-12h",
@@ -148,7 +148,7 @@
     },
     {
       "matiere": "Physique-Chimie",
-      "type": "TP — Michelson",
+      "type": "TP — TP tournants",
       "date_label": "Mardi 2 juin",
       "date_iso": "2026-06-02",
       "heure": "9h-12h",
