@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "29/05/2026 13:59 UTC",
+  "updated_at": "29/05/2026 17:33 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -112,6 +112,18 @@
     },
     {
       "matiere": "Physique-Chimie",
+      "type": "🧑‍🏫 Passage TD",
+      "date_label": "Lundi 1 juin",
+      "date_iso": "2026-06-01",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "EL10",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
       "type": "TP — TP tournants",
       "date_label": "Mardi 2 juin",
       "date_iso": "2026-06-02",
@@ -121,6 +133,18 @@
       "groupe": "Modulation d'amplitude",
       "salle": "207",
       "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Jeudi 4 juin",
+      "date_iso": "2026-06-04",
+      "heure": "10h30-11h00",
+      "heure_start": "10:30",
+      "heure_end": "11:00",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
     },
     {
       "matiere": "Physique-Chimie",
