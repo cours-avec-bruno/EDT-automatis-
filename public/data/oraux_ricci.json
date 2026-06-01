@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "01/06/2026 18:32 UTC",
+  "updated_at": "01/06/2026 21:52 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -137,6 +137,30 @@
     {
       "matiere": "Physique-Chimie",
       "type": "Oral",
+      "date_label": "Mercredi 3 juin",
+      "date_iso": "2026-06-03",
+      "heure": "17h-17h30",
+      "heure_start": "17:00",
+      "heure_end": "17:30",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mercredi 3 juin",
+      "date_iso": "2026-06-03",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
       "date_label": "Jeudi 4 juin",
       "date_iso": "2026-06-04",
       "heure": "10h30-11h00",
@@ -145,6 +169,18 @@
       "groupe": "—",
       "salle": "—",
       "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "🧑‍🏫 Passage TD",
+      "date_label": "Jeudi 4 juin",
+      "date_iso": "2026-06-04",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "C10",
+      "salle": "—",
+      "professeur": "—"
     },
     {
       "matiere": "Physique-Chimie",
