@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "02/06/2026 18:29 UTC",
+  "updated_at": "02/06/2026 21:32 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -133,18 +133,6 @@
       "groupe": "Modulation d'amplitude",
       "salle": "207",
       "professeur": "—"
-    },
-    {
-      "matiere": "Physique-Chimie",
-      "type": "Oral",
-      "date_label": "Mercredi 3 juin",
-      "date_iso": "2026-06-03",
-      "heure": "17h-17h30",
-      "heure_start": "17:00",
-      "heure_end": "17:30",
-      "groupe": "—",
-      "salle": "—",
-      "professeur": "M. Louvet"
     },
     {
       "matiere": "Mathématiques",
