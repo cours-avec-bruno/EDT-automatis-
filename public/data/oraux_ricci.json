@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "08/06/2026 08:29 UTC",
+  "updated_at": "08/06/2026 12:45 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -157,18 +157,6 @@
       "groupe": "—",
       "salle": "249",
       "professeur": "Mme. Pollet"
-    },
-    {
-      "matiere": "Mathématiques",
-      "type": "Oral/Colle",
-      "date_label": "Mercredi 10 juin",
-      "date_iso": "2026-06-10",
-      "heure": "—",
-      "heure_start": null,
-      "heure_end": null,
-      "groupe": "—",
-      "salle": "—",
-      "professeur": "—"
     }
   ],
   "errors": []
