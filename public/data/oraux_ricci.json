@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "09/06/2026 21:25 UTC",
+  "updated_at": "09/06/2026 22:55 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -145,6 +145,54 @@
       "groupe": "—",
       "salle": "249",
       "professeur": "Mme. Pollet"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Lundi 15 juin",
+      "date_iso": "2026-06-15",
+      "heure": "12h30-13h00",
+      "heure_start": "12:30",
+      "heure_end": "13:00",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Lundi 15 juin",
+      "date_iso": "2026-06-15",
+      "heure": "15h30-16h",
+      "heure_start": "15:30",
+      "heure_end": "16:00",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Lundi 15 juin",
+      "date_iso": "2026-06-15",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Physique-Chimie",
+      "type": "Oral",
+      "date_label": "Mercredi 17 juin",
+      "date_iso": "2026-06-17",
+      "heure": "9h30-10h00",
+      "heure_start": "09:30",
+      "heure_end": "10:00",
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "M. Louvet"
     }
   ],
   "errors": []
