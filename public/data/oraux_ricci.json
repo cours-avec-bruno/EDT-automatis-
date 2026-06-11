@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "11/06/2026 06:26 UTC",
+  "updated_at": "11/06/2026 11:06 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -183,6 +183,18 @@
       "professeur": "—"
     },
     {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mardi 16 juin",
+      "date_iso": "2026-06-16",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
       "matiere": "Physique-Chimie",
       "type": "Oral",
       "date_label": "Mercredi 17 juin",
@@ -193,6 +205,18 @@
       "groupe": "—",
       "salle": "—",
       "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mercredi 17 juin",
+      "date_iso": "2026-06-17",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
     }
   ],
   "errors": []
