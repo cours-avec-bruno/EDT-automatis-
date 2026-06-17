@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "17/06/2026 02:30 UTC",
+  "updated_at": "17/06/2026 07:33 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -203,7 +203,7 @@
       "heure_start": "09:30",
       "heure_end": "10:00",
       "groupe": "—",
-      "salle": "214?",
+      "salle": "214",
       "professeur": "M. Louvet"
     },
     {
@@ -215,7 +215,7 @@
       "heure_start": "14:30",
       "heure_end": "15:00",
       "groupe": "—",
-      "salle": "214?",
+      "salle": "214",
       "professeur": "M. Louvet"
     },
     {
