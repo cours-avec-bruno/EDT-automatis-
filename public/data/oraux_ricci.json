@@ -1,6 +1,6 @@
 {
   "student": "Ricci Bruno",
-  "updated_at": "19/07/2026 12:08 UTC",
+  "updated_at": "19/07/2026 13:46 UTC",
   "oraux": [
     {
       "matiere": "Physique-Chimie",
@@ -39,6 +39,18 @@
       "professeur": "M. Louvet"
     },
     {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Jeudi 21 mai",
+      "date_iso": "2026-05-21",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
       "matiere": "Physique-Chimie",
       "type": "🧑‍🏫 Passage TD",
       "date_label": "Vendredi 22 mai",
@@ -63,6 +75,18 @@
       "professeur": "M. Louvet"
     },
     {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Jeudi 28 mai",
+      "date_iso": "2026-05-28",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
       "matiere": "Physique-Chimie",
       "type": "🧑‍🏫 Passage TD",
       "date_label": "Lundi 1 juin",
@@ -71,6 +95,18 @@
       "heure_start": null,
       "heure_end": null,
       "groupe": "EL10",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mercredi 3 juin",
+      "date_iso": "2026-06-03",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
       "salle": "—",
       "professeur": "—"
     },
@@ -135,6 +171,30 @@
       "professeur": "M. Louvet"
     },
     {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Lundi 15 juin",
+      "date_iso": "2026-06-15",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mardi 16 juin",
+      "date_iso": "2026-06-16",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
+    },
+    {
       "matiere": "Physique-Chimie",
       "type": "Oral",
       "date_label": "Mercredi 17 juin",
@@ -157,9 +217,19 @@
       "groupe": "—",
       "salle": "214",
       "professeur": "M. Louvet"
+    },
+    {
+      "matiere": "Mathématiques",
+      "type": "Oral/Colle",
+      "date_label": "Mercredi 17 juin",
+      "date_iso": "2026-06-17",
+      "heure": "—",
+      "heure_start": null,
+      "heure_end": null,
+      "groupe": "—",
+      "salle": "—",
+      "professeur": "—"
     }
   ],
-  "errors": [
-    "The read operation timed out"
-  ]
+  "errors": []
 }
